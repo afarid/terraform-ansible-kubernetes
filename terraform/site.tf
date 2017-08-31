@@ -28,3 +28,9 @@ module "ssh_sg" {
   source_cidr_block = "0.0.0.0/0"
 }
 
+#Create IAM role to assing it to kubernetes master to able to access cloudwatch adata
+module "iam" {
+  source = "./modules/iam"
+  name = "${var.cluster_name}"
+}
+
