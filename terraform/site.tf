@@ -20,3 +20,11 @@ module "ec2key" {
   public_key = "${var.public_key}"
 }
 
+#Create security group for ssh access
+module "ssh_sg" {
+  source = "./modules/ssh_sg"
+  name = "${var.cluster_name}_ssh_sg"
+  vpc_id = "${module.vpc_subnets.vpc_id}"
+  source_cidr_block = "0.0.0.0/0"
+}
+
