@@ -12,3 +12,11 @@ module "vpc_subnets" {
   private_subnets_cidr = "172.16.30.0/24,172.16.40.0/24"
   azs = "${lookup(var.azs, var.region)}"
 }
+
+#Create ssh key to be abale to login ec2 instances
+module "ec2key" {
+  source = "./modules/ec2key"
+  key_name = "${var.cluster_name}"
+  public_key = "${var.public_key}"
+}
+

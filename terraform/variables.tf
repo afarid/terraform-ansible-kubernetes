@@ -1,5 +1,6 @@
 variable "region" {}
-
+variable "cluster_name" {}
+variable "public_key" {}
 variable "azs" {
   type = "map"
   default = {
