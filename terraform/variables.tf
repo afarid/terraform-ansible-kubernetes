@@ -1,6 +1,7 @@
 variable "region" {}
 variable "cluster_name" {}
 variable "public_key" {}
+variable "instance_type" {}
 variable "azs" {
   type = "map"
   default = {
@@ -14,5 +15,15 @@ variable "azs" {
       ap-southeast-1 = "ap-southeast-1a,ap-southeast-1b"
       ap-southeast-2 = "ap-southeast-2a,ap-southeast-2b"
       sa-east-1 = "sa-east-1a,sa-east-1c"
+    }
+}
+
+variable "amis" {
+    type = "map"
+    default = {
+        us-east-1 = "ami-cd0f5cb6"
+        us-east-2 = "ami-10547475"
+        us-west-1 = "ami-09d2fb69"
+        us-west-2 = "ami-6e1a0117"
     }
 }

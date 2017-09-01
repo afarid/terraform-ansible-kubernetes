@@ -34,3 +34,32 @@ module "iam" {
   name = "${var.cluster_name}"
 }
 
+#Create kubernetes master ec2 instance
+module "ec2_kube_master" {
+  source = "./modules/ec2"
+  name = "${var.cluster_name}"
+  server_role = "master"
+  ami_id = "${lookup(var.amis, var.region)}"
+  key_name = "${module.ec2key.ec2key_name}"
+  count = "1"
+  security_group_id = "${module.ssh_sg.ssh_sg_id}"
+  subnet_id = "${module.vpc_subnets.public_subnets_id}"
+  user_data = "#!/bin/bash\napt-get -y update\napt -y upgrade\nreboot\n"
+  instance_type = "${var.instance_type}"
+  iam_instance_profile="${module.iam.cloudwatch_access_profile}"
+}
+
+#Create kubernetes minions ec2 instance
+module "ec2_kube_minions" {
+  source = "./modules/ec2"
+  name = "${var.cluster_name}"
+  server_role = "minion"
+  ami_id = "${lookup(var.amis, var.region)}"
+  key_name = "${module.ec2key.ec2key_name}"
+  count = "3"
+  security_group_id = "${module.ssh_sg.ssh_sg_id}"
+  subnet_id = "${module.vpc_subnets.public_subnets_id}"
+  user_data = "#!/bin/bash\napt-get -y update\napt -y upgrade\nreboot\n"
+  instance_type = "${var.instance_type}"
+  iam_instance_profile="${module.iam.cloudwatch_access_profile}"
+}
