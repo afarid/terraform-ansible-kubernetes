@@ -7,3 +7,4 @@ export TF_VAR_public_key=`cat ~/.ssh/id_rsa.pub`
 #Define ec2 instance type
 export TF_VAR_instance_type=t2.micro
 
+
