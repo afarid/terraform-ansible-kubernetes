@@ -11,6 +11,7 @@ class Inventory(object):
     cluster_name = os.environ['TF_VAR_cluster_name']
 
     def get_instances_description(self, key, value):
+        """ A function to return All instances in current cluster with certian key value pair"""
         response = self.ec2_client.describe_instances(
             Filters=[
                 {
@@ -30,6 +31,7 @@ class Inventory(object):
         return response['Reservations']
 
     def get_instances_public_ips_by_role(self, role):
+        """ This function returns all ips of specific kubernetes role master or minions """
         ip_list = []
         instances_info = self.get_instances_description('tag:role', role)
         for host in instances_info:
@@ -46,6 +48,7 @@ class Inventory(object):
         return instance_info
 
     def generate_template(self):
+        """ This function returns a json which works as dynamic inventory for ansible """
         template_loader = jinja2.FileSystemLoader(searchpath="./")
         template_env = jinja2.Environment(loader=template_loader)
         temolate_file = "inventory.j2"
