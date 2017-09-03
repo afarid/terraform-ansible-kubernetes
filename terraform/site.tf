@@ -44,7 +44,7 @@ module "ec2_kube_master" {
   count = "1"
   security_group_id = "${module.ssh_sg.ssh_sg_id}"
   subnet_id = "${module.vpc_subnets.public_subnets_id}"
-  user_data = "#!/bin/bash\napt-get -y update\napt -y upgrade\nreboot\n"
+  user_data = "#!/bin/bash\napt-get -y update\napt -y upgrade\napt -y install python\nreboot\n"
   instance_type = "${var.instance_type}"
   iam_instance_profile="${module.iam.cloudwatch_access_profile}"
 }
@@ -59,7 +59,7 @@ module "ec2_kube_minions" {
   count = "3"
   security_group_id = "${module.ssh_sg.ssh_sg_id}"
   subnet_id = "${module.vpc_subnets.public_subnets_id}"
-  user_data = "#!/bin/bash\napt-get -y update\napt -y upgrade\nreboot\n"
+  user_data = "#!/bin/bash\napt-get -y update\napt -y upgrade\napt -y install python\nreboot\n"
   instance_type = "${var.instance_type}"
   iam_instance_profile="${module.iam.cloudwatch_access_profile}"
 }
