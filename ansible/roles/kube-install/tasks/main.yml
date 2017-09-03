@@ -1,0 +1,5 @@
+---
+# tasks file for kube-install
+- apt_key:
+    url: "https://packages.cloud.google.com/apt/doc/apt-key.gpg"
+    state: present
