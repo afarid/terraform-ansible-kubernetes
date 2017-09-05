@@ -59,7 +59,7 @@ cd terraform
 source ../variables.sh
 terraform init && terraform get && terraform plan && terraform apply
 ```
-######Above terraform plan will do: 
+####Above terraform plan will do: 
 - Create 1 x VPC with 4 x VPC subnets
 - Create the AWS key pair with the provided public key
 - Create 1 x security group for each(SSH,Webservers)
@@ -72,7 +72,7 @@ ansible-playbook -i inventory.py playbook.yml -u ubuntu -s
 
 ```
 
-######Above Ansible playbook will do: 
+####Above Ansible playbook will do: 
 - Install docker on all provisioned instances by terrafrom
 - Install Kubernetes on master and minions
 - Join Miniions to the master
