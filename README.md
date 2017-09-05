@@ -83,4 +83,26 @@ ansible-playbook -i inventory.py playbook.yml -u ubuntu -s
 ./inventory.py
 
 ```
-##
+#### To check the status of the cluster
+ 
+ ```bash
+ # Get the public ip of kube master
+ ./inventory.py
+
+ # Remote login to master
+ ssh ubuntu@<master public ip>
+
+ #Swich to root user
+ sudo su -
+
+ # List kube nodes
+ kubectl get nodes
+
+ # Alle nodes should be in ready state
+ NAME               STATUS    AGE       VERSION
+ip-172-16-10-13    Ready     1m        v1.7.5
+ip-172-16-10-142   Ready     2m        v1.7.5
+ip-172-16-10-228   Ready     1m        v1.7.5
+ip-172-16-20-232   Ready     1m        v1.7.5
+
+```
