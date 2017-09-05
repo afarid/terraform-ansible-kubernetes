@@ -4,7 +4,7 @@
   command: "kubeadm init --pod-network-cidr=10.244.0.0/16"
 
 - name: Get Kube token
-  raw: "kubeadm token list | grep -v TOKEN | awk \'{print $1}\'"
+  raw: "kubeadm token list | grep -v TOKEN | awk '{print $1}'"
   register: token
 
 - name: Create directory for kube config

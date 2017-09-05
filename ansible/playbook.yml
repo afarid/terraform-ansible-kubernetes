@@ -1,7 +1,7 @@
-- hosts: all
-  roles:
-    - docker-install
-    - kube-install
+#- hosts: all
+#  roles:
+#    - docker-install
+#    - kube-install
 
 - hosts: kube_master
   roles:

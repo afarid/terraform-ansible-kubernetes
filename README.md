@@ -25,18 +25,20 @@ total 60
 
 2- Launch A docker container is prepared with all tools to launch the envinment
 ```bash
- sudo docker run -it -v ~/.ssh:/root/.ssh/ -v $PWD/src/:/source amrfarid/tac /bin/bash
+ sudo docker run -it -v ~/.ssh:/root/.ssh/ -v $PWD/:/source amrfarid/tac /bin/bash
 ```
 
 3- you need to export `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` as environment variables, Consider change below values to yours
 
 ```
-export AWS_ACCESS_KEY_ID="xxxxxxxxxxxxx"
-export AWS_SECRET_ACCESS_KEY="yyyyyyyyyyyyyyyyyyyyyyyyyyyyyy"
+export AWS_ACCESS_KEY_ID="xxxxxxxxxxxxxxxxxxxx"
+export AWS_SECRET_ACCESS_KEY="yyyyyyyyyyyyyyyyyyyyyyy"
+export AWS_DEFAULT_REGION=us-east-1
 ```
 
 4- Edit variables file, Define AWS region, Name for launched stack, EC2 Instance type, Database password, and S3 bucket name you want to create to upload backup to.  
 ```bash
+cd /source
 vim variables.sh
  
 #!/usr/bin/env bash
@@ -49,11 +51,13 @@ export TF_VAR_public_key=`cat ~/.ssh/id_rsa.pub`
 export TF_VAR_instance_type=t2.micro
 ```
 
+````source variables.sh````
+
 5- To build your environment:
 ```
 cd terraform
 source ../variables.sh
-terrafrom init && terraform get && terraform plan && terraform apply
+terraform init && terraform get && terraform plan && terraform apply
 ```
 ######Above terraform plan will do: 
 - Create 1 x VPC with 4 x VPC subnets
@@ -63,7 +67,7 @@ terrafrom init && terraform get && terraform plan && terraform apply
 
 
 ```bash
-cd ansible/
+cd /source/ansible/
 ansible-playbook -i inventory.py playbook.yml -u ubuntu -s
 
 ```
