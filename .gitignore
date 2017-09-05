@@ -2,3 +2,5 @@
 terraform/terraform.tfstate*
 terraform/.terraform/
 .terraform.tfstate.lock.info
+ansible/playbook.retry
+*.retry

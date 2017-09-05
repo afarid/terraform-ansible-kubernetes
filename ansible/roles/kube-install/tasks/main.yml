@@ -1,0 +1,28 @@
+---
+# tasks file for kube-install
+- name: Add key for kubernetes repo
+  apt_key:
+    url: "https://packages.cloud.google.com/apt/doc/apt-key.gpg"
+    state: present
+
+- name: Install kubernetes repo
+  copy:
+    src: kubernetes.list
+    dest: /etc/apt/sources.list.d/kubernetes.list
+    mode: 0644
+
+- name: Install packges for kubernetes
+  apt:
+    name: "{{ item }}"
+    state: installed
+    update_cache: yes
+  with_items:
+    - kubelet
+    - kubeadm
+
+- name: install kubectl
+  get_url:
+    url: "https://storage.googleapis.com/kubernetes-release/release/v1.7.5/bin/linux/amd64/kubectl"
+    dest: /usr/local/bin/kubectl
+    mode: 0755
+

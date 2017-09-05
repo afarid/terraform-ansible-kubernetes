@@ -1,0 +1,4 @@
+---
+# tasks file for kube-minions-install
+- name: Join the kube cluster
+  command: "kubeadm join --token {{ hostvars[groups['kube_master'][0]].token.stdout_lines[0]}} {{ hostvars[groups['kube_master'][0]]['ansible_eth0']['ipv4']['address'] }}:6443"

@@ -1,0 +1,12 @@
+- hosts: all
+  roles:
+    - docker-install
+    - kube-install
+
+- hosts: kube_master
+  roles:
+    - kube-master-install
+
+- hosts: kube_minions
+  roles:
+    - kube-minions-install

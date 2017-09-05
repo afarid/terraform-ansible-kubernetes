@@ -1,0 +1,24 @@
+---
+# tasks file for kube-master-install
+- name: Start Kubernetes cluster
+  command: "kubeadm init --pod-network-cidr=10.244.0.0/16"
+
+- name: Get Kube token
+  raw: "kubeadm token list | grep -v TOKEN | awk \'{print $1}\'"
+  register: token
+
+- name: Create directory for kube config
+  file:
+    path: /root/.kube/
+    state: directory
+    mode: 0755
+
+- name: Configure agent
+  copy:
+    remote_src: true
+    src: /etc/kubernetes/admin.conf
+    dest: /root/.kube/config
+    mode: 0644
+
+- name: Install Kubernetes network pods
+  command: "kubectl apply -f http://docs.projectcalico.org/v2.4/getting-started/kubernetes/installation/hosted/kubeadm/1.6/calico.yaml"
