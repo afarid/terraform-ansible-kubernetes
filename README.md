@@ -11,7 +11,8 @@ docker --version
 Docker version 17.06.0-ce, build 02c1d87
 ```
 
-#####How to install and deploy
+####How to install and deploy
+
 1- Make sure that you have created ssh keys inside you home directory as they will be used for ansible to configure instances
 ```bash
 ls -l   ~/.ssh
