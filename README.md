@@ -11,7 +11,7 @@ docker --version
 Docker version 17.06.0-ce, build 02c1d87
 ```
 
-####How to install and deploy
+#### How to install and deploy
 
 1- Make sure that you have created ssh keys inside you home directory as they will be used for ansible to configure instances
 ```bash
@@ -59,7 +59,7 @@ cd terraform
 source ../variables.sh
 terraform init && terraform get && terraform plan && terraform apply
 ```
-####Above terraform plan will do: 
+#### Above terraform plan will do: 
 - Create 1 x VPC with 4 x VPC subnets
 - Create the AWS key pair with the provided public key
 - Create 1 x security group for each(SSH,Webservers)
@@ -72,7 +72,7 @@ ansible-playbook -i inventory.py playbook.yml -u ubuntu -s
 
 ```
 
-####Above Ansible playbook will do: 
+#### Above Ansible playbook will do: 
 - Install docker on all provisioned instances by terrafrom
 - Install Kubernetes on master and minions
 - Join Miniions to the master
